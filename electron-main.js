@@ -11,7 +11,7 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1200,
-        height: 800,
+        height: 1100,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -53,4 +53,12 @@ ipcMain.on('start-battle', (event, data) => {
 ipcMain.on('attack', (event, moveName) => {
     console.log(`Attack: ${moveName}`);
     BattleManager.executeAttack(moveName);
+});
+
+ipcMain.on('send-chat', (event, text)=>{
+    BattleManager.sendChatMessage(text);
+});
+
+ipcMain.on('send-sticker', (event, base64Data) => {
+    BattleManager.sendSticker(base64Data);
 });
